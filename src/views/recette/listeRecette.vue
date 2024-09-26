@@ -1,12 +1,21 @@
 <template>
   <div class="container mt-4">
     <h2>Liste des recettes</h2>
-    <div class="mt-4">
+    <div class="row d-flex mt-4">
+      <div class="col-6">
+        <div class="form-group col-md-6">
+          <input type="search" class="form-control" v-model="title" id="">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex justify-content-end">
       <RouterLink
         class="btn btn-primary"
         :to="{ name: 'ajouteRecette' }"
         >Ajouter une recette</RouterLink
       >
+    </div>
+      </div>
     </div>
 
     <table class="table table-striped table-bordered mt-4 mb-4">
@@ -20,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(recipe, index) in recipes" :key="index">
+        <tr v-for="(recipe, index) in filteredRecipes" :key="index">
           <th scope="row">{{ index + 1 }}</th>
           <td>{{ recipe.title }}</td>
           <td>{{ recipe.ingredients }}</td>
@@ -94,6 +103,9 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
+import { ref, computed  } from "vue";
+
+const title = ref('');
 
 const store = useRecettetore();
 const recipes = store.recipes;
@@ -102,6 +114,11 @@ const router = useRouter();
 function deleteRecipe(index) {
   store.deleteRecipe(index);
 }
+const filteredRecipes = computed(() =>
+  recipes.filter((recipe) =>
+    recipe.title.toLowerCase().includes(title.value.toLowerCase())
+  )
+);
 
 function editRecipe(index) {
   router.push({ name: "modifier", params: { index } });
