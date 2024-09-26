@@ -4,12 +4,18 @@ import ListeRecette from "@/views/recette/listeRecette.vue";
 import Home from "@/views/Home.vue";
 import ModifierRecette from "@/views/recette/modifierRecette.vue";
 import ShowRecette from "@/views/recette/showRecette.vue";
+import Categorie from "../views/categorie/categorie.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/categorie",
+    name: "categorie",
+    component: Categorie,
   },
   {
     path: "/ajout",

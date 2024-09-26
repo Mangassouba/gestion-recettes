@@ -27,6 +27,11 @@
   import { ref } from 'vue';
 import { useRecettetore } from '@/store/recetteStore';
 import { useRouter } from 'vue-router';
+// import axios from 'axios';
+
+// const  axiosAddRecette = async () => {
+//   const resp = await axios.get('/user')
+// }
   
   const title = ref('');
   const ingredients = ref('');

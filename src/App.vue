@@ -14,6 +14,9 @@ import { RouterView } from 'vue-router';
       <div class="navbar-nav">
         <router-link class="nav-link active" aria-current="page" :to="{name: 'recette'}">Recette</router-link>
       </div>
+      <div class="navbar-nav">
+        <router-link class="nav-link active" aria-current="page" :to="{name: 'categorie'}">Categorie</router-link>
+      </div>
     </div>
   </div>
 </nav>
