@@ -6,7 +6,12 @@ export const useRecettetore = defineStore('recipes', {
       title: 'crepe',
       ingredients: '30 cl de lait, 10 cl d\'eau ,1/2 sachet de levure de boulanger , 7 œufs',
       type:"plat"
-    }]
+    }],
+    categories:[
+      {categorie:'aaaa'},
+      {categorie:'bbbb'},
+      {categorie:'ccc'},
+    ]
   }),
   actions: {
     addRecipe(recette) {

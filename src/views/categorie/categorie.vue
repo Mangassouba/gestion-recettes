@@ -1,44 +1,34 @@
 <template>
   <div class="container mt-4">
-<<<<<<< HEAD
-    <h2>{{ $t("recette.list_page.titre") }}</h2>
-    <div class="mt-4">
-=======
-    <h2>Liste des recettes</h2>
-    <div class="row d-flex mt-4">
-      <div class="col-6">
-        <div class="form-group col-md-6">
-          <input type="search" class="form-control" v-model="title" id="">
+    <h4>Categorie</h4>
+    <div class="row d-flex">
+      <form class="d-flex" @submit.prevent="submitform">
+        <div class="col-md-6">
+          <label for="categorie">Categorie</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="categorie"
+            id="categorie"
+          />
         </div>
-      </div>
-      <div class="col-6">
-        <div class="d-flex justify-content-end">
->>>>>>> c712d89da397ca7f4b57bbff766d89b38bdb6754
-      <RouterLink
-        class="btn btn-primary"
-        :to="{ name: 'ajouteRecette' }"
-        >{{ $t("recette.list_page.button_add") }}</RouterLink
-      >
+        <div class="col-md-4 mt-4 m-4">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+      </form>
     </div>
-      </div>
-    </div>
-
     <table class="table table-striped table-bordered mt-4 mb-4">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">{{ $t("recette.list_page.label_title") }}</th>
-          <th scope="col">{{ $t("recette.create_page.label_type") }}</th>
-          <th scope="col">{{ $t("recette.list_page.label_ingredients") }}</th>
+          <th scope="col">Categorie</th>
           <th scope="col" class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(recipe, index) in filteredRecipes" :key="index">
+        <tr v-for="(item, index) in categories" :key="index">
           <th scope="row">{{ index + 1 }}</th>
-          <td>{{ recipe.title }}</td>
-          <td>{{ recipe.ingredients }}</td>
-          <td>{{ recipe.type }}</td>
+          <td>{{ item.categorie }}</td>
           <td class="text-center">
             <button
               @click="deleteRecipe(index)"
@@ -78,10 +68,7 @@
                 />
               </svg>
             </button>
-            <button
-              @click="viewRecipe(index)"
-              class="btn btn-info btn-sm me-2"
-            >
+            <button @click="viewRecipe(index)" class="btn btn-info btn-sm me-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -104,32 +91,22 @@
     </table>
   </div>
 </template>
-
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
 import { ref, computed  } from "vue";
 
-const title = ref('');
+const categorie = ref('');
 
 const store = useRecettetore();
-const recipes = store.recipes;
+const categories = store.categories;
 const router = useRouter();
 
-function deleteRecipe(index) {
-  store.deleteRecipe(index);
-}
-const filteredRecipes = computed(() =>
-  recipes.filter((recipe) =>
-    recipe.title.toLowerCase().includes(title.value.toLowerCase())
-  )
-);
-
-function editRecipe(index) {
-  router.push({ name: "modifier", params: { index } });
+function submitform() {
+    store.addCategorie({
+        categorie:categorie.value
+    })
+    categorie.value = '';
 }
 
-function viewRecipe(index) {
-  router.push({ name: "show", params: { index } });
-}
 </script>
