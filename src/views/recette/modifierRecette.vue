@@ -1,24 +1,24 @@
 <template>
     <div class="container">
-      <h2>Modifier la recette</h2>
+      <h2>{{ $t("recette.modify_page.titre") }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3">
-          <label for="title" class="form-label">Titre</label>
+          <label for="title" class="form-label">{{ $t("recette.modify_page.label_titre") }}</label>
           <input v-model="title" type="text" id="title" class="form-control" required />
         </div>
         <div class="mb-3">
-          <label for="ingredients" class="form-label">Ingrédients</label>
+          <label for="ingredients" class="form-label">{{ $t("recette.modify_page.label_ingredients") }}</label>
           <textarea v-model="ingredients" id="ingredients" class="form-control" required></textarea>
         </div>
         <div class="mb-3">
-          <label for="type" class="form-label">Type de recette</label>
+          <label for="type" class="form-label">{{ $t("recette.modify_page.label_recipeType") }}</label>
           <select v-model="type" id="type" class="form-select" required>
-            <option value="entrée">Entrée</option>
-            <option value="plat">Plat</option>
-            <option value="dessert">Dessert</option>
+            <option value="entrée">{{ $t("recette.modify_page.type_entree") }}</option>
+            <option value="plat">{{ $t("recette.modify_page.type_plat") }}</option>
+            <option value="dessert">{{ $t("recette.modify_page.type_dessert") }}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        <button type="submit" class="btn btn-primary">{{ $t("recette.modify_page.button_edit") }}</button>
       </form>
     </div>
   </template>
