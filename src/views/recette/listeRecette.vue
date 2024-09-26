@@ -1,11 +1,11 @@
 <template>
   <div class="container mt-4">
-    <h2>Liste des recettes</h2>
+    <h2>{{ $t("recette.list_page.titre") }}</h2>
     <div class="mt-4">
       <RouterLink
         class="btn btn-primary"
         :to="{ name: 'ajouteRecette' }"
-        >Ajouter une recette</RouterLink
+        >{{ $t("recette.list_page.button_add") }}</RouterLink
       >
     </div>
 
@@ -13,9 +13,9 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Titre</th>
-          <th scope="col">Type</th>
-          <th scope="col">ingredients</th>
+          <th scope="col">{{ $t("recette.list_page.label_title") }}</th>
+          <th scope="col">{{ $t("recette.create_page.label_type") }}</th>
+          <th scope="col">{{ $t("recette.list_page.label_ingredients") }}</th>
           <th scope="col" class="text-center">Action</th>
         </tr>
       </thead>

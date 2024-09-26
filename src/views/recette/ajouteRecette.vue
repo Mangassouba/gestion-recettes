@@ -1,24 +1,24 @@
 <template>
     <div class="container">
-      <h2>Ajouter une recette</h2>
+      <h2>{{ $t("recette.create_page.titre") }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-3">
-          <label for="title" class="form-label">Titre</label>
+          <label for="title" class="form-label">{{ $t("recette.create_page.label_title") }}</label>
           <input v-model="title" type="text" id="title" class="form-control" required />
         </div>
         <div class="mb-3">
-          <label for="ingredients" class="form-label">Ingrédients</label>
+          <label for="ingredients" class="form-label">{{ $t("recette.create_page.label_ingredients") }}</label>
           <textarea v-model="ingredients" id="ingredients" class="form-control" required></textarea>
         </div>
         <div class="mb-3">
-          <label for="type" class="form-label">Type de recette</label>
+          <label for="type" class="form-label">{{ $t("recette.create_page.label_type") }}</label>
           <select v-model="type" id="type" class="form-select" required>
-            <option value="entrée">Entrée</option>
-            <option value="plat">Plat</option>
-            <option value="dessert">Dessert</option>
+            <option value="entrée">{{ $t("recette.create_page.type_entree") }}</option>
+            <option value="plat">{{ $t("recette.create_page.type_plat") }}</option>
+            <option value="dessert">{{ $t("recette.create_page.type_dessert") }}</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="btn btn-primary">{{ $t("recette.create_page.button_add") }}</button>
       </form>
     </div>
   </template>
