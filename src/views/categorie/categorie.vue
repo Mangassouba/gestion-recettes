@@ -72,7 +72,7 @@
                 />
               </svg>
             </button>
-            <button @click="viewRecipe(index)" class="btn btn-info btn-sm me-2">
+            <button @click="viewRecipe(item)" class="btn btn-info btn-sm me-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -109,6 +109,10 @@ const router = useRouter();
 onMounted(() => {
   store.loadDataFromApis();
 });
+
+function viewRecipe(recipe) {
+  router.push({ name: "showCategory", params: { id: recipe.id } });
+}
 
 function deleteCategory(id) {
   console.log("ID de catégorie:", id);
