@@ -10,12 +10,12 @@
           <input
             type="text"
             class="form-control"
-            v-model="categorie"
+            v-model="name"
             id="categorie"
           />
         </div>
         <div class="col-md-4 mt-4 m-4">
-          <button class="btn btn-primary">
+          <button type="submit" class="btn btn-primary">
             {{ $t("recette.category_page.button_submit") }}
           </button>
         </div>
@@ -100,11 +100,20 @@ import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
 import { ref, onMounted, computed } from "vue";
 
+const store = useRecettetore();
+const router = useRouter();
 const categorie = ref("");
 
-const store = useRecettetore();
+const name = ref('');
+
+function submitform() {
+  store.addCategory({
+    name: name.value
+  });
+  name.value = "";
+}
+
 // const categories = store.categories;
-const router = useRouter();
 
 onMounted(() => {
   store.loadDataFromApis();
@@ -128,10 +137,10 @@ function editCategory(item) {
   router.push({ name: "modifierCategory", params: { id: item.id } });
 }
 
-function submitform() {
-  store.addCategorie({
-    categorie: categorie.value,
-  });
-  categorie.value = "";
-}
+// function submitform() {
+//   store.addCategorie({
+//     categorie: categorie.value,
+//   });
+//   categorie.value = "";
+// }
 </script>

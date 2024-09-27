@@ -30,6 +30,9 @@ export const useRecettetore = defineStore('recipes', {
     async addRecipe(recipe) {
       return await axios.post("http://localhost:3070/recipes", recipe);
     },
+    async addCategory(category) {
+      return await axios.post("http://localhost:3070/category", category);
+    },
     getRecipe(id) {
       return this.recipes.find(recipe => recipe.id === id);
     },
