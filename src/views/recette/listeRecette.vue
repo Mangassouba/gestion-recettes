@@ -1,8 +1,6 @@
 <template>
   <div class="container mt-4">
-
     <h2>{{ $t("recette.list_page.titre") }}</h2>
-   
     <div class="row d-flex mt-4">
       <div class="col-6">
         <div class="form-group col-md-6">
@@ -11,7 +9,6 @@
       </div>
       <div class="col-6">
         <div class="d-flex justify-content-end">
-
       <RouterLink
         class="btn btn-primary"
         :to="{ name: 'ajouteRecette' }"
