@@ -1,23 +1,13 @@
-<script setup>
-import { useI18n } from 'vue-i18n';
-import { RouterView } from 'vue-router';
-
-const { locale } = useI18n();
-const changeLanguage = (event) => {
-  locale.value = event.target.value;
-};
-</script>
-
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <!-- Lien vers la page d'accueil -->
+      <!-- Lien vers la page d'accueil avec l'icône -->
       <router-link 
-        class="navbar-brand"  
+        class="navbar-brand me-3"  
         :to="{ name: 'Home' }" 
         exact-active-class="active"
       >
-        {{ $t("recette.app_page.titre") }}
+      <i class="fas fa-utensils mt-2" ></i> ROTANA
       </router-link>
 
       <!-- Bouton pour mobile -->
@@ -26,36 +16,37 @@ const changeLanguage = (event) => {
       </button>
 
       <!-- Liens du menu -->
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <!-- Lien vers la page des recettes -->
+      <div class="collapse navbar-collapse d-flex justify-content-end gap-5" id="navbarNavAltMarkup">
+        <!-- Lien vers la page des recettes avec l'icône -->
         <div class="navbar-nav">
           <router-link 
             class="nav-link" 
             :to="{ name: 'recette' }" 
             exact-active-class="active"
           >
+           
             {{ $t("recette.app_page.ricipe_title") }}
           </router-link>
         </div>
 
-        <!-- Lien vers la page des catégories -->
+        <!-- Lien vers la page des catégories avec l'icône -->
         <div class="navbar-nav">
           <router-link 
             class="nav-link" 
             :to="{ name: 'categorie' }" 
             exact-active-class="active"
           >
-            Categorie
+            
+            {{ $t("recette.app_page.recipe_title") }}
           </router-link>
         </div>
+        
         <div class="navbar-nav">
           <select class="form-select" @change="changeLanguage">
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
+            <option value="fr">Français</option>
+            <option value="en">Englais</option>
           </select>
         </div>
-      
-        
       </div>
     </div>
   </nav>
@@ -65,6 +56,16 @@ const changeLanguage = (event) => {
     <RouterView />
   </div>
 </template>
+
+<script setup>
+import { useI18n } from 'vue-i18n';
+import { RouterView } from 'vue-router';
+
+const { locale } = useI18n();
+const changeLanguage = (event) => {
+  locale.value = event.target.value;
+};
+</script>
 
 <style scoped>
 /* Style pour le lien actif dans la navigation */
