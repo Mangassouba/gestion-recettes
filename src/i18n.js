@@ -14,6 +14,7 @@ const messages = {
         type_plat: "Main course",
         type_dessert: "Dessert",
         button_add: "Add",
+        option: "Please select a category"
       },
       list_page: {
         titre: "Recipe List",
@@ -67,6 +68,7 @@ const messages = {
         type_entree: "Entrée",
         type_plat: "Plat",
         type_dessert: "Dessert",
+        option:"Veuillez sélectionner une catégorie",
         button_add: "Ajouter",
       },
       list_page: {
@@ -94,6 +96,7 @@ const messages = {
         label_type: "Type",
         button_back: "Fermer"
       },
+      
       app_page: {
         titre: "GestionRecette",
         ricipe_title: "Recette",

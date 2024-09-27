@@ -51,7 +51,9 @@
           class="form-select"
           required
         >
-          <option value="" disabled>Veuillez sélectionner une catégorie</option>
+          <option value="" disabled>{{
+            $t("recette.create_page.option")
+          }}</option>
           <option
             v-for="category in categorys"
             :key="category.id"
