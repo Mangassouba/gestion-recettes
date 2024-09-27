@@ -42,7 +42,8 @@ const messages = {
       },
       app_page: {
         titre: "GestionRecipe",
-        ricipe_title: "Recipe"
+        ricipe_title: "Recipe",
+        recipe_title:"Category"
       },
       home_page: {
         titre: "Welcome to ROTANA",
@@ -51,7 +52,8 @@ const messages = {
         titre: "Category",
         label_title: "Category",
         label_col: "Category",
-        button_submit: "Submit"
+        button_submit: "Add category",
+        button_update: "save changes"
       }
     }
   },
@@ -94,7 +96,8 @@ const messages = {
       },
       app_page: {
         titre: "GestionRecette",
-        ricipe_title: "Recette"
+        ricipe_title: "Recette",
+        recipe_title:"Catégorie"
       },
       home_page: {
         titre: "Bienvenue à ROTANA",
@@ -103,7 +106,8 @@ const messages = {
         titre: "Catégorie",
         label_title: "Catégorie",
         label_col: "Catégorie",
-        button_submit: "Envoyer"
+        button_submit: "Ajouter categorie",
+        button_update: "Modifier"
       }
     }
   }
