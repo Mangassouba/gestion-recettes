@@ -49,7 +49,15 @@ const i18n = createI18n({
       },
       home_page: {
         titre: "Welcome to ROTANA",
-      }
+      },
+      category_page: {
+        titre: "Category",
+        label_title:"Category",
+        label_col:"Category",
+         button_submit:"Submit"
+      },
+  },
+      
       }},
     fr: {
       recette: {
@@ -96,7 +104,13 @@ const i18n = createI18n({
           },
           home_page: {
             titre: "BIENVENUE A ROTANA",
-          }
+          },
+          category_page: {
+            titre: "Categorie",
+            label_title:"Categorie",
+            label_col:"Categorie",
+            button_submit:"Envoyer"
+          
       },
     },
   },

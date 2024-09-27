@@ -24,7 +24,7 @@ import { useRecettetore } from '@/store/recetteStore';
   
   const index = route.params.index;
   const recipe = ref(null);
-  
+   
   onMounted(() => {
     recipe.value = store.getRecipe(index);
   });

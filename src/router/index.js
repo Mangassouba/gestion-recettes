@@ -5,6 +5,7 @@ import Home from "@/views/Home.vue";
 import ModifierRecette from "@/views/recette/modifierRecette.vue";
 import ShowRecette from "@/views/recette/showRecette.vue";
 import Categorie from "../views/categorie/categorie.vue";
+import ListRecette from "../views/TestAxios/ListRecette.vue";
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     path: "/categorie",
     name: "categorie",
     component: Categorie,
+  },
+  {
+    path: "/ListRecette",
+    name: "ListRecette",
+    component: ListRecette,
   },
   {
     path: "/ajout",

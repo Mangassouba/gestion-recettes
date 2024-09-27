@@ -116,6 +116,9 @@ const router = useRouter();
 
 function deleteRecipe(index) {
   store.deleteRecipe(index);
+  onMounted(() => {
+  store.loadDataFromApi();
+});
 }
 const filteredRecipes = computed(() =>
   recipes.filter((recipe) =>
