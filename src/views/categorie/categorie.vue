@@ -26,12 +26,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in categories" :key="index">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ item.categorie }}</td>
+        <tr v-for="(item) in store.categorys" :key="item.id">
+          <th scope="row">{{ item.id }}</th>
+          <td>{{ item.name }}</td>
           <td class="text-center">
             <button
-              @click="deleteRecipe(index)"
+              @click="deleteCategory(item.id)"
               class="btn btn-danger btn-sm me-2"
             >
               <svg
@@ -94,13 +94,27 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
-import { ref, computed  } from "vue";
+import { ref, onMounted, computed  } from "vue";
 
 const categorie = ref('');
 
 const store = useRecettetore();
-const categories = store.categories;
+// const categories = store.categories;
 const router = useRouter();
+
+onMounted(() => {
+  store.loadDataFromApis()
+});
+
+function deleteCategory(id) {
+  console.log('ID de catégorie:', id);
+  if (id) {
+    store.deleteRecipe(id);
+  } else {
+    console.error('ID de catégorie manquant');
+  }
+}
+
 
 function submitform() {
     store.addCategorie({

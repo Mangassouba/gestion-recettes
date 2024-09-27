@@ -45,5 +45,11 @@ export const useRecettetore = defineStore('recipes', {
         await this.loadDataFromApi();
       } catch (error) {}
     },
+   async deleteRecipe(id) {
+      try {
+        await axios.delete(`http://localhost:3070/category/${id}`);
+        await this.loadDataFromApis();
+      } catch (error) {}
+    },
   }
 });
