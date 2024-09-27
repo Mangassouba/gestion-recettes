@@ -25,18 +25,20 @@
           <th scope="col">{{ $t("recette.list_page.label_title") }}</th>
           <th scope="col">{{ $t("recette.create_page.label_type") }}</th>
           <th scope="col">{{ $t("recette.list_page.label_ingredients") }}</th>
+          <th scope="col">{{ $t("recette.list_page.label_ingredients") }}</th>
           <th scope="col" class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(recipe, index) in filteredRecipes" :key="index">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ recipe.title }}</td>
-          <td>{{ recipe.ingredients }}</td>
+        <tr v-for="(recipe) in filteredRecipes" :key="recipe.id">
+          <th scope="row">{{ recipe.id }}</th>
+          <td>{{ recipe.titre }}</td>
           <td>{{ recipe.type }}</td>
+          <td>{{ recipe.ingredient }}</td>
+          <td>{{ recipe.category_id }}</td>
           <td class="text-center">
             <button
-              @click="deleteRecipe(index)"
+              @click="deleteRecipe(recipe.id)"
               class="btn btn-danger btn-sm me-2"
             >
               <svg
@@ -53,7 +55,7 @@
               </svg>
             </button>
             <button
-              @click="editRecipe(index)"
+              @click="editRecipe(recipe)"
               class="btn btn-warning btn-sm me-2"
             >
               <svg
@@ -103,31 +105,37 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
-import { ref, computed  } from "vue";
+import { ref, computed, onMounted  } from "vue";
 
 const title = ref('');
 
+onMounted(() => {
+  store.loadDataFromApi()
+});
+
 const store = useRecettetore();
 const recipes = store.recipes;
+console.log(recipes)
 const router = useRouter();
 
-function deleteRecipe(index) {
-  store.deleteRecipe(index);
+function deleteRecipe(id) {
+  store.deleteRecipe(id);
   onMounted(() => {
   store.loadDataFromApi();
 });
 }
 const filteredRecipes = computed(() =>
-  recipes.filter((recipe) =>
-    recipe.title.toLowerCase().includes(title.value.toLowerCase())
+  store.recipes.filter((recipe) =>
+    recipe.titre.toLowerCase().includes(title.value.toLowerCase())
   )
 );
 
-function editRecipe(index) {
-  router.push({ name: "modifier", params: { index } });
+function editRecipe(recipe) {
+  console.log(recipe)
+  router.push({ name: "modifier", params: { id: recipe.id } });
 }
 
-function viewRecipe(index) {
-  router.push({ name: "show", params: { index } });
+function viewRecipe(recipe) {
+  router.push({ name: "show", params: { id: recipe.id } });
 }
 </script>

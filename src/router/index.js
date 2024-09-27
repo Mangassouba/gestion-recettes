@@ -30,12 +30,12 @@ const routes = [
     component: ListeRecette,
   },
   {
-    path: "/mod/:index",
+    path: "/mod/:id",
     name: "modifier",
     component: ModifierRecette,
   },
   {
-    path: "/show/:index",
+    path: "/show/:id",
     name: "show",
     component: ShowRecette
   },

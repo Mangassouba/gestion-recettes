@@ -3,11 +3,7 @@ import axios from "axios";
 
 export const useRecettetore = defineStore('recipes', {
   state: () => ({
-    recipes: [{
-      title: 'crepe',
-      ingredients: '30 cl de lait, 10 cl d\'eau ,1/2 sachet de levure de boulanger , 7 œufs',
-      type:"plat"
-    }],
+    recipes: [],
     categories:[
       {categorie:'aaaa'},
       {categorie:'bbbb'},
@@ -17,28 +13,29 @@ export const useRecettetore = defineStore('recipes', {
   actions: {
     async loadDataFromApi() {
       try {
-        const resp = await axios.get("http://localhost:3005/api/recipes");
-        this.recettes = resp.data;
+        const resp = await axios.get("http://localhost:3070/recipes");
+        this.recipes = resp.data;
       } catch (error) {
-        this.recettes = [];
+        this.recipes = [];
       }
     },
-    async addRecipe(recette) {
-      // this.recipes.push(recette);
-      return await axios.post("http://localhost:3005/api/recipes", recette);
+    async addRecipe(recipe) {
+      return await axios.post("http://localhost:3070/recipes", recipe);
     },
-    updateRecipe(index, updatedRecipe) {
-      this.recipes[index] = updatedRecipe;
+    getRecipe(id) {
+      return this.recipes.find(recipe => recipe.id === id);
     },
-   async deleteRecipe(id) {
-      // this.recipes.splice(index, 1);
+    async updateRecipe(id, updatedRecipe) {
       try {
-        await axios.delete(`http://localhost:3005/api/recipes/${id}`);
+        await axios.put(`http://localhost:3070/recipes/${id}`, updatedRecipe);
         await this.loadDataFromApi();
       } catch (error) {}
-    }, 
-    getRecipe(index) {
-      return this.recipes[index];
+    },
+   async deleteRecipe(id) {
+      try {
+        await axios.delete(`http://localhost:3070/recipes/${id}`);
+        await this.loadDataFromApi();
+      } catch (error) {}
     },
   }
 });
