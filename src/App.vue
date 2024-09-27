@@ -1,5 +1,11 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
 import { RouterView } from 'vue-router';
+
+const { locale } = useI18n();
+const changeLanguage = (event) => {
+  locale.value = event.target.value;
+};
 </script>
 
 <template>
@@ -42,17 +48,14 @@ import { RouterView } from 'vue-router';
             Categorie
           </router-link>
         </div>
-
-        <!-- Lien vers la page Axios (par exemple, si tu utilises Axios) -->
         <div class="navbar-nav">
-          <router-link 
-            class="nav-link" 
-            :to="{ name: 'ListRecette' }" 
-            exact-active-class="active"
-          >
-            Axios
-          </router-link>
+          <select class="form-select" @change="changeLanguage">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+          </select>
         </div>
+      
+        
       </div>
     </div>
   </nav>
