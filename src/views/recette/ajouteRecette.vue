@@ -1,55 +1,104 @@
 <template>
-    <div class="container">
-      <h2>{{ $t("recette.create_page.titre") }}</h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="mb-3">
-          <label for="title" class="form-label">{{ $t("recette.create_page.label_title") }}</label>
-          <input v-model="title" type="text" id="title" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label for="ingredients" class="form-label">{{ $t("recette.create_page.label_ingredients") }}</label>
-          <textarea v-model="ingredients" id="ingredients" class="form-control" required></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="type" class="form-label">{{ $t("recette.create_page.label_type") }}</label>
-          <select v-model="type" id="type" class="form-select" required>
-            <option value="entrée">{{ $t("recette.create_page.type_entree") }}</option>
-            <option value="plat">{{ $t("recette.create_page.type_plat") }}</option>
-            <option value="dessert">{{ $t("recette.create_page.type_dessert") }}</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">{{ $t("recette.create_page.button_add") }}</button>
-      </form>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-import { useRecettetore } from '@/store/recetteStore';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
+  <div class="container">
+    <h2>{{ $t("recette.create_page.titre") }}</h2>
+    <form @submit.prevent="handleSubmit">
+      <div class="mb-3">
+        <label for="title" class="form-label">{{
+          $t("recette.create_page.label_title")
+        }}</label>
+        <input
+          v-model="titre"
+          type="text"
+          id="title"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="ingredients" class="form-label">{{
+          $t("recette.create_page.label_ingredients")
+        }}</label>
+        <textarea
+          v-model="ingredient"
+          id="ingredients"
+          class="form-control"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">{{
+          $t("recette.create_page.label_type")
+        }}</label>
+        <select v-model="type" id="type" class="form-select" required>
+          <option value="entrée">
+            {{ $t("recette.create_page.type_entree") }}
+          </option>
+          <option value="plat">
+            {{ $t("recette.create_page.type_plat") }}
+          </option>
+          <option value="dessert">
+            {{ $t("recette.create_page.type_dessert") }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">{{
+          $t("recette.create_page.label_title")
+        }}</label>
+        <select
+          v-model="category_id"
+          id="category"
+          class="form-select"
+          required
+        >
+          <option value="" disabled>Veuillez sélectionner une catégorie</option>
+          <option
+            v-for="category in categorys"
+            :key="category.id"
+            :value="category.id"
+          >
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        {{ $t("recette.create_page.button_add") }}
+      </button>
+    </form>
+  </div>
+</template>
 
-// const  axiosAddRecette = async () => {
-//   const resp = await axios.get('/user')
-// }
-  
-  const title = ref('');
-  const ingredients = ref('');
-  const type = ref('plat');
-  
-  const store = useRecettetore();
-  const router = useRouter()
-  
-  function handleSubmit() {
-    store.addRecipe({
-      title: title.value,
-      ingredients: ingredients.value,
-      type: type.value
-    });
-    title.value = '';
-    ingredients.value = '';
-    type.value = 'plat';
-    router.push('/recette')
-  }
-  </script>
-  
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import { useRecettetore } from "@/store/recetteStore";
+import { useRouter } from "vue-router";
+
+const titre = ref("");
+const ingredient = ref("");
+const type = ref("");
+const category_id = ref("");
+const categorys = ref([]);
+
+const store = useRecettetore();
+const category = useRecettetore();
+const router = useRouter();
+
+onMounted(async () => {
+  await store.loadDataFromApis();
+  categorys.value = store.categorys;
+});
+
+function handleSubmit() {
+  store.addRecipe({
+    titre: titre.value,
+    type: type.value,
+    ingredient: ingredient.value,
+    category_id: category_id.value,
+  });
+  titre.value = "";
+  type.value = "";
+  ingredient.value = "";
+  category_id.value = "";
+  router.push("/recette");
+}
+</script>

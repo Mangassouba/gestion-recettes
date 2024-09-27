@@ -4,7 +4,7 @@ import axios from "axios";
 export const useRecettetore = defineStore('recipes', {
   state: () => ({
     recipes: [],
-    categories:[
+    categorys:[
       {categorie:'aaaa'},
       {categorie:'bbbb'},
       {categorie:'ccc'},
@@ -17,6 +17,14 @@ export const useRecettetore = defineStore('recipes', {
         this.recipes = resp.data;
       } catch (error) {
         this.recipes = [];
+      }
+    },
+    async loadDataFromApis() {
+      try {
+        const resp = await axios.get("http://localhost:3070/category");
+        this.categorys = resp.data;
+      } catch (error) {
+        this.categorys = [];
       }
     },
     async addRecipe(recipe) {
