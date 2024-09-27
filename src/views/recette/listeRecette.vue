@@ -76,7 +76,7 @@
               </svg>
             </button>
             <button
-              @click="viewRecipe(index)"
+              @click="viewRecipe(recipe)"
               class="btn btn-info btn-sm me-2"
             >
               <svg
