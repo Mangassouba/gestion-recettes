@@ -1,10 +1,8 @@
 <template>
   <div class="container mt-4">
-<<<<<<< HEAD
+
     <h2>{{ $t("recette.list_page.titre") }}</h2>
-    <div class="mt-4">
-=======
-    <h2>Liste des recettes</h2>
+   
     <div class="row d-flex mt-4">
       <div class="col-6">
         <div class="form-group col-md-6">
@@ -13,7 +11,7 @@
       </div>
       <div class="col-6">
         <div class="d-flex justify-content-end">
->>>>>>> c712d89da397ca7f4b57bbff766d89b38bdb6754
+
       <RouterLink
         class="btn btn-primary"
         :to="{ name: 'ajouteRecette' }"
@@ -118,6 +116,9 @@ const router = useRouter();
 
 function deleteRecipe(index) {
   store.deleteRecipe(index);
+  onMounted(() => {
+  store.loadDataFromApi();
+});
 }
 const filteredRecipes = computed(() =>
   recipes.filter((recipe) =>

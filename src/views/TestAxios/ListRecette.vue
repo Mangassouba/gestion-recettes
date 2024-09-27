@@ -1,34 +1,46 @@
 <template>
   <div class="container mt-4">
-    <h4>{{ $t("recette.category_page.titre") }}</h4>
-    <div class="row d-flex">
-      <form class="d-flex" @submit.prevent="submitform">
-        <div class="col-md-6">
-          <label for="categorie">{{ $t("recette.category_page.label_title") }}</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="categorie"
-            id="categorie"
-          />
+    <form
+    @submit.prevent="addRecette"
+    class="formulaire form mb-5 shadow p-3 mb-5 bg-body rounded"
+  >
+
+    <h2>{{ $t("recette.list_page.titre") }}</h2>
+   
+    <div class="row d-flex mt-4">
+      <div class="col-6">
+        <div class="form-group col-md-6">
+          <input type="search" class="form-control" v-model="title" id="">
         </div>
-        <div class="col-md-4 mt-4 m-4">
-          <button class="btn btn-primary">{{ $t("recette.category_page.button_submit") }}</button>
-        </div>
-      </form>
+      </div>
+      <div class="col-6">
+        <div class="d-flex justify-content-end">
+
+      <RouterLink
+        class="btn btn-primary"
+        :to="{ name: 'ajouteRecette' }"
+        >{{ $t("recette.list_page.button_add") }}</RouterLink
+      >
     </div>
+      </div>
+    </div>
+
     <table class="table table-striped table-bordered mt-4 mb-4">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">{{ $t("recette.category_page.label_col") }}</th>
-          <th scope="col" class="text-center">Action</th> 
+          <th scope="col">{{ $t("recette.list_page.label_title") }}</th>
+          <th scope="col">{{ $t("recette.create_page.label_type") }}</th>
+          <th scope="col">{{ $t("recette.list_page.label_ingredients") }}</th>
+          <th scope="col" class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in categories" :key="index">
+        <tr v-for="(recipe, index) in filteredRecipes" :key="index">
           <th scope="row">{{ index + 1 }}</th>
-          <td>{{ item.categorie }}</td>
+          <td>{{ recipe.title }}</td>
+          <td>{{ recipe.ingredients }}</td>
+          <td>{{ recipe.type }}</td>
           <td class="text-center">
             <button
               @click="deleteRecipe(index)"
@@ -68,7 +80,10 @@
                 />
               </svg>
             </button>
-            <button @click="viewRecipe(index)" class="btn btn-info btn-sm me-2">
+            <button
+              @click="viewRecipe(index)"
+              class="btn btn-info btn-sm me-2"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -89,24 +104,66 @@
         </tr>
       </tbody>
     </table>
+  </form>
   </div>
 </template>
+
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
 import { ref, computed  } from "vue";
-
-const categorie = ref('');
-
+import axios from "axios";
+const title = ref("");
+const ingredient = ref("");
+const type = ref("");
 const store = useRecettetore();
-const categories = store.categories;
+const recipes = store.recipes;
 const router = useRouter();
+const axiosAddRecette = async() => {
+  try {
+    const resp = await axios.get("http://localhost:3005/api/recipes");
+    console.log(resp.data);
+    
+    size.value = resp.data.length; 
+  } catch (error) {
+    
+  }  
+ 
+};
+const addRecette = async () => {
+  try {
+    await store.addRecete({
+    title: title.value,
+    ingredient: ingredient.value,
+    type: type.value,
+  });
 
-function submitform() {
-    store.addCategorie({
-        categorie:categorie.value
-    })
-    categorie.value = '';
+  title.value = "";
+  ingredient.value = "";
+  type.value = "";
+  router.push("/listrecette");
+  } catch (error) {
+    console.log(error)    
+  }
+  
+};
+function deleteRecipe(index) {
+  store.deleteRecipe(index);
+  onMounted(() => {
+  store.loadDataFromApi();
+});
+}
+const filteredRecipes = computed(() =>
+  recipes.filter((recipe) =>
+    recipe.title.toLowerCase().includes(title.value.toLowerCase())
+  )
+);
+
+function editRecipe(index) {
+  router.push({ name: "modifier", params: { index } });
 }
 
+function viewRecipe(index) {
+  router.push({ name: "show", params: { index } });
+}
 </script>
