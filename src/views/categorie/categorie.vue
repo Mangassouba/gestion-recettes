@@ -4,7 +4,9 @@
     <div class="row d-flex">
       <form class="d-flex" @submit.prevent="submitform">
         <div class="col-md-6">
-          <label for="categorie">{{ $t("recette.category_page.label_title") }}</label>
+          <label for="categorie">{{
+            $t("recette.category_page.label_title")
+          }}</label>
           <input
             type="text"
             class="form-control"
@@ -13,7 +15,9 @@
           />
         </div>
         <div class="col-md-4 mt-4 m-4">
-          <button class="btn btn-primary">{{ $t("recette.category_page.button_submit") }}</button>
+          <button class="btn btn-primary">
+            {{ $t("recette.category_page.button_submit") }}
+          </button>
         </div>
       </form>
     </div>
@@ -22,11 +26,11 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">{{ $t("recette.category_page.label_col") }}</th>
-          <th scope="col" class="text-center">Action</th> 
+          <th scope="col" class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item) in store.categorys" :key="item.id">
+        <tr v-for="item in store.categorys" :key="item.id">
           <th scope="row">{{ item.id }}</th>
           <td>{{ item.name }}</td>
           <td class="text-center">
@@ -48,7 +52,7 @@
               </svg>
             </button>
             <button
-              @click="editRecipe(index)"
+              @click="editCategory(item)"
               class="btn btn-warning btn-sm me-2"
             >
               <svg
@@ -94,33 +98,36 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
-import { ref, onMounted, computed  } from "vue";
+import { ref, onMounted, computed } from "vue";
 
-const categorie = ref('');
+const categorie = ref("");
 
 const store = useRecettetore();
 // const categories = store.categories;
 const router = useRouter();
 
 onMounted(() => {
-  store.loadDataFromApis()
+  store.loadDataFromApis();
 });
 
 function deleteCategory(id) {
-  console.log('ID de catégorie:', id);
+  console.log("ID de catégorie:", id);
   if (id) {
     store.deleteRecipe(id);
   } else {
-    console.error('ID de catégorie manquant');
+    console.error("ID de catégorie manquant");
   }
 }
 
-
-function submitform() {
-    store.addCategorie({
-        categorie:categorie.value
-    })
-    categorie.value = '';
+function editCategory(item) {
+  console.log(item);
+  router.push({ name: "modifierCategory", params: { id: item.id } });
 }
 
+function submitform() {
+  store.addCategorie({
+    categorie: categorie.value,
+  });
+  categorie.value = "";
+}
 </script>

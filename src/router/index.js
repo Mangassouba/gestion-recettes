@@ -5,6 +5,8 @@ import Home from "@/views/Home.vue";
 import ModifierRecette from "@/views/recette/modifierRecette.vue";
 import ShowRecette from "@/views/recette/showRecette.vue";
 import Categorie from "../views/categorie/categorie.vue";
+import ModifietCategory from "../views/categorie/modifietCategory.vue";
+
 
 
 const routes = [
@@ -33,6 +35,11 @@ const routes = [
     path: "/mod/:id",
     name: "modifier",
     component: ModifierRecette,
+  },
+  {
+    path: "/modifie/:id",
+    name: "modifierCategory",
+    component: ModifietCategory,
   },
   {
     path: "/show/:id",
