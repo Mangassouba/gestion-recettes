@@ -43,7 +43,7 @@
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">{{
-          $t("recette.create_page.label_title")
+          $t("recette.create_page.label_category")
         }}</label>
         <select
           v-model="category_id"
@@ -63,9 +63,18 @@
           </option>
         </select>
       </div>
+      <div class="d-flex justify-content-between" >
       <button type="submit" class="btn btn-primary">
         {{ $t("recette.create_page.button_add") }}
       </button>
+      <RouterLink
+  class="btn btn-primary"
+  :to="{ name: 'recette' }"
+>
+  <i class="fas fa-arrow-left"></i> 
+</RouterLink>
+
+  </div>
     </form>
   </div>
 </template>

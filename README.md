@@ -1,5 +1,5 @@
 
-# Application de Gestion de Recettes
+# API de Gestion des Recettes
 
 ## Description
 
@@ -54,3 +54,4 @@ l'application a été developpeée en utilisant vuejs 3 avec la compostion  API 
 Hama Houllah Mangasouba
 
 https://github.com/Mangassouba
+
