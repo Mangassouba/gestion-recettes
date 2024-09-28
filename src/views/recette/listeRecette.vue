@@ -25,7 +25,7 @@
           <th scope="col">{{ $t("recette.list_page.label_title") }}</th>
           <th scope="col">{{ $t("recette.create_page.label_type") }}</th>
           <th scope="col">{{ $t("recette.list_page.label_ingredients") }}</th>
-          <th scope="col">{{ $t("recette.list_page.label_ingredients") }}</th>
+          <th scope="col">{{ $t("recette.list_page.label_category") }}</th>
           <th scope="col" class="text-center">Action</th>
         </tr>
       </thead>
