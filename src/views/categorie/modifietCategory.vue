@@ -13,7 +13,7 @@
             />
           </div>
           <div class="col-md-4 mt-4 m-4">
-            <button type="submit" class="btn btn-primary">{{ $t("recette.category_page.button_submit") }}</button>
+            <button type="submit" class="btn btn-primary">{{ $t("recette.category_page.button_update") }}</button>
           </div>
         </form>
       </div>

@@ -42,7 +42,7 @@ const messages = {
         titre: "Recipe Details",
         label_ingredients: "Ingredients",
         label_type: "Type",
-        button_back: "Close"
+        button_back: "Back"
       },
       app_page: {
         titre: "GestionRecipe",
@@ -57,7 +57,8 @@ const messages = {
         label_title: "Category",
         label_col: "Category",
         button_submit: "Add category",
-        button_update: "save changes"
+        button_update: "Modify category",
+        
       }
     }
   },
@@ -116,7 +117,7 @@ const messages = {
         label_title: "Catégorie",
         label_col: "Catégorie",
         button_submit: "Ajouter categorie",
-        button_update: "Modifier"
+        button_update: "Modifier Categorie"
       }
     }
   }
