@@ -13,6 +13,7 @@ const messages = {
         type_entree: "Starter",
         type_plat: "Main course",
         type_dessert: "Dessert",
+        label_category:"Category",
         button_add: "Add",
         option: "Please select a category"
       },
@@ -30,6 +31,7 @@ const messages = {
         label_titre: "Title",
         label_ingredients: "Ingredients",
         label_recipeType: "Type",
+        label_category:"Category",
         submit: "Save Changes",
         type_entree: "Starter",
         type_plat: "Main course",
@@ -40,7 +42,7 @@ const messages = {
         titre: "Recipe Details",
         label_ingredients: "Ingredients",
         label_type: "Type",
-        button_back: "Close"
+        button_back: "Back"
       },
       app_page: {
         titre: "GestionRecipe",
@@ -55,7 +57,8 @@ const messages = {
         label_title: "Category",
         label_col: "Category",
         button_submit: "Add category",
-        button_update: "save changes"
+        button_update: "Modify category",
+        
       }
     }
   },
@@ -69,6 +72,7 @@ const messages = {
         type_entree: "Entrée",
         type_plat: "Plat",
         type_dessert: "Dessert",
+        label_category:"Categorie",
         option:"Veuillez sélectionner une catégorie",
         button_add: "Ajouter",
       },
@@ -86,6 +90,7 @@ const messages = {
         label_titre: "Titre",
         label_ingredients: "Ingrédients",
         label_recipeType: "Type",
+        label_category:"Categorie",
         submit: "Enregistrer les modifications",
         type_entree: "Entrée",
         type_plat: "Plat",
@@ -112,7 +117,7 @@ const messages = {
         label_title: "Catégorie",
         label_col: "Catégorie",
         button_submit: "Ajouter categorie",
-        button_update: "Modifier"
+        button_update: "Modifier Categorie"
       }
     }
   }

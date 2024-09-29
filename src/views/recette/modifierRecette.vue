@@ -42,8 +42,8 @@
         ></textarea>
       </div>
       <div class="mb-3">
-        <label for="title" class="form-label">{{
-          $t("recette.modify_page.label_titre")
+        <label for="category" class="form-label">{{
+          $t("recette.modify_page.label_category")
         }}</label>
         <input
           v-model="category_id"
@@ -53,9 +53,18 @@
           required
         />
       </div>
+      <div class="d-flex justify-content-between">
       <button type="submit" class="btn btn-primary">
         {{ $t("recette.modify_page.button_edit") }}
       </button>
+      <RouterLink
+  class="btn btn-primary"
+  :to="{ name: 'recette' }"
+>
+  <i class="fas fa-arrow-left"></i> 
+</RouterLink>
+</div>
+      
     </form>
   </div>
 </template>
