@@ -4,7 +4,7 @@
     <div class="row d-flex mt-4">
       <div class="col-6">
         <div class="form-group col-md-6">
-          <input type="search" class="form-control" v-model="title" id="">
+          <input type="search" class="form-control" v-model="title" id="" placeholder="recherche">
         </div>
       </div>
       <div class="col-6">
@@ -119,11 +119,18 @@ console.log(recipes)
 const router = useRouter();
 
 function deleteRecipe(id) {
-  store.deleteRecipe(id);
-  onMounted(() => {
-  store.loadDataFromApi();
-});
+  const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer cette recette ?");
+  if (confirmation) {
+    store.deleteRecipe(id);
+    onMounted(() => {
+      store.loadDataFromApi();
+    });
+    console.log("Recette supprimée :", id);
+  } else {
+    console.log("Suppression annulée");
+  }
 }
+
 const filteredRecipes = computed(() =>
   store.recipes.filter((recipe) =>
     recipe.titre.toLowerCase().includes(title.value.toLowerCase())
