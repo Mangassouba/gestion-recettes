@@ -35,7 +35,7 @@
           <td>{{ recipe.titre }}</td>
           <td>{{ recipe.type }}</td>
           <td>{{ recipe.ingredient }}</td>
-          <td>{{ recipe.category_id }}</td>
+          <td>{{ getCategoryTitle(recipe.category_id) }}</td>
           <td class="text-center">
             <button
               @click="deleteRecipe(recipe.id)"
@@ -105,26 +105,31 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
-import { ref, computed, onMounted  } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 const title = ref('');
 
 onMounted(() => {
-  store.loadDataFromApi()
+  store.loadDataFromApi();
 });
 
 const store = useRecettetore();
+
+const categorys = computed(() => store.categorys);
 const recipes = store.recipes;
-console.log(recipes)
 const router = useRouter();
+
+const getCategoryTitle = (categoryId) => {
+  const category = categorys.value.find(
+    (c) => c.id === categoryId
+  );
+  return category ? category.name : 'Catégorie non trouvée';
+};
 
 function deleteRecipe(id) {
   const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer cette recette ?");
   if (confirmation) {
     store.deleteRecipe(id);
-    onMounted(() => {
-      store.loadDataFromApi();
-    });
     console.log("Recette supprimée :", id);
   } else {
     console.log("Suppression annulée");
@@ -138,7 +143,6 @@ const filteredRecipes = computed(() =>
 );
 
 function editRecipe(recipe) {
-  console.log(recipe)
   router.push({ name: "modifier", params: { id: recipe.id } });
 }
 
