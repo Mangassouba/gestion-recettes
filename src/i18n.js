@@ -53,12 +53,17 @@ const messages = {
         titre: "Welcome to ROTANA",
       },
       category_page: {
-        titre: "Category",
-        label_title: "Category",
+        titre: "Create a category",
+        label_title: "Category name",
         label_col: "Category",
-        button_submit: "Add category",
+        button_submit: "Add",
         button_update: "Modify category",
         
+      },
+      list_category: {
+        titre: "Category List",
+        button_add: "Add a category",
+      
       }
     }
   },
@@ -113,11 +118,16 @@ const messages = {
         titre: "Bienvenue à ROTANA",
       },
       category_page: {
-        titre: "Catégorie",
-        label_title: "Catégorie",
+        titre: "Ajouter une catégorie",
+        label_title: "Nom du Catégorie",
         label_col: "Catégorie",
-        button_submit: "Ajouter categorie",
+        button_submit: "Ajouter",
         button_update: "Modifier Categorie"
+      },
+      list_category: {
+        titre: "Liste des catégorie",
+        button_add: "Ajouter une category",
+      
       }
     }
   }
