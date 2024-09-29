@@ -1,11 +1,11 @@
 <template>
   <div class="container mt-4">
-    <h4>{{ $t("recette.category_page.titre") }}</h4>
+    <h4>{{ $t("recette.list_category.titre") }}</h4>
 
     <div class="col">
       <div class="d-flex justify-content-end">
         <router-link to="/ajoutCategory" class="btn btn-primary">
-          {{ $t("recette.list_page.button_add") }}
+          {{ $t("recette.list_category.button_add") }}
         </router-link>
       </div>
     </div>
