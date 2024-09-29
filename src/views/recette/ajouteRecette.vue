@@ -67,13 +67,6 @@
       <button type="submit" class="btn btn-primary">
         {{ $t("recette.create_page.button_add") }}
       </button>
-      <RouterLink
-  class="btn btn-primary"
-  :to="{ name: 'recette' }"
->
-  <i class="fas fa-arrow-left"></i> 
-</RouterLink>
-
   </div>
     </form>
   </div>
