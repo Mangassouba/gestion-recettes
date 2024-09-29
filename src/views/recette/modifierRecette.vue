@@ -45,32 +45,26 @@
         <label for="category" class="form-label">{{
           $t("recette.modify_page.label_category")
         }}</label>
-        <input
-          v-model="category_id"
-          type="number"
-          id="category_id"
-          class="form-control"
-          required
-        />
+        <select v-model="categoryName" id="category_id" class="form-select" required>
+          <option v-for="category in categories" :key="category.id" :value="category.name">
+            {{ category.name }}
+          </option>
+        </select>
       </div>
       <div class="d-flex justify-content-between">
-      <button type="submit" class="btn btn-primary">
-        {{ $t("recette.modify_page.button_edit") }}
-      </button>
-      <RouterLink
-  class="btn btn-primary"
-  :to="{ name: 'recette' }"
->
-  <i class="fas fa-arrow-left"></i> 
-</RouterLink>
-</div>
-      
+        <button type="submit" class="btn btn-primary">
+          {{ $t("recette.modify_page.button_edit") }}
+        </button>
+        <RouterLink class="btn btn-primary" :to="{ name: 'recette' }">
+          <i class="fas fa-arrow-left"></i>
+        </RouterLink>
+      </div>
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useRecettetore } from "@/store/recetteStore";
 
@@ -85,6 +79,8 @@ const titre = ref("");
 const ingredient = ref("");
 const type = ref("");
 const category_id = ref("");
+const categoryName = ref("");
+const categories = computed(() => store.categorys);
 
 onMounted(() => {
   const recipe = store.getRecipe(parseInt(route.params.id));
@@ -92,16 +88,19 @@ onMounted(() => {
     titre.value = recipe.titre;
     type.value = recipe.type;
     ingredient.value = recipe.ingredient;
-    category_id.value = recipe.category_id;
+    const category = categories.value.find(c => c.id === recipe.category_id);
+    if (category) {
+      categoryName.value = category.name;
+    }
   }
 });
 
 function handleSubmit() {
+  const selectedCategory = categories.value.find(c => c.name === categoryName.value);
   store.updateRecipe(id, {
     titre: titre.value,
     ingredient: ingredient.value,
     type: type.value,
-    category_id: category_id.value,
   });
   router.push({ name: "recette" });
 }
