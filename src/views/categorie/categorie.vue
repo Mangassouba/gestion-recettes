@@ -1,25 +1,13 @@
 <template>
   <div class="container mt-4">
     <h4>{{ $t("recette.category_page.titre") }}</h4>
-    <div class="row d-flex">
-      <form class="d-flex" @submit.prevent="submitform">
-        <div class="col-md-6">
-          <label for="categorie">{{
-            $t("recette.category_page.label_title")
-          }}</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="name"
-            id="categorie"
-          />
-        </div>
-        <div class="col-md-4 mt-4 m-4">
-          <button type="submit" class="btn btn-primary">
-            {{ $t("recette.category_page.button_submit") }}
-          </button>
-        </div>
-      </form>
+
+    <div class="col">
+      <div class="d-flex justify-content-end">
+        <router-link to="/ajoutCategory" class="btn btn-primary">
+          {{ $t("recette.list_page.button_add") }}
+        </router-link>
+      </div>
     </div>
     <table class="table table-striped table-bordered mt-4 mb-4">
       <thead>
@@ -103,18 +91,16 @@ import { ref, onMounted, computed } from "vue";
 const store = useRecettetore();
 const router = useRouter();
 const categorie = ref("");
-
-const name = ref('');
+const name = ref("");
 
 function submitform() {
   store.addCategory({
-    name: name.value
+    name: name.value,
   });
   name.value = "";
 }
 
-// const categories = store.categories;
-
+// Chargement des données à l'initialisation
 onMounted(() => {
   store.loadDataFromApis();
 });
@@ -124,11 +110,18 @@ function viewRecipe(recipe) {
 }
 
 function deleteCategory(id) {
-  console.log("ID de catégorie:", id);
-  if (id) {
-    store.deleteRecipe(id);
+  const confirmation = window.confirm(
+    "Voulez-vous vraiment supprimer cette catégorie ?"
+  );
+  if (confirmation) {
+    if (id) {
+      store.deleteCategory(id);
+      console.log("Catégorie supprimée :", id);
+    } else {
+      console.error("ID de catégorie manquant");
+    }
   } else {
-    console.error("ID de catégorie manquant");
+    console.log("Suppression annulée");
   }
 }
 
@@ -136,11 +129,4 @@ function editCategory(item) {
   console.log(item);
   router.push({ name: "modifierCategory", params: { id: item.id } });
 }
-
-// function submitform() {
-//   store.addCategorie({
-//     categorie: categorie.value,
-//   });
-//   categorie.value = "";
-// }
 </script>

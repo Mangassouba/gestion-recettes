@@ -7,6 +7,8 @@ import ShowRecette from "@/views/recette/showRecette.vue";
 import Categorie from "../views/categorie/categorie.vue";
 import ModifietCategory from "../views/categorie/modifietCategory.vue";
 import ShowCategory from "../views/categorie/showCategory.vue";
+import AjoutCategory from "../views/categorie/ajoutCategory.vue";
+
 
 
 
@@ -51,6 +53,11 @@ const routes = [
     path: "/showCategory/:id",
     name: "showCategory",
     component: ShowCategory
+  },
+  {
+    path: "/ajoutCategory/",
+    name: "ajoutCategory",
+    component: AjoutCategory
   },
   
 ];
