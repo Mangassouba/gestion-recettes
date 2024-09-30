@@ -40,9 +40,16 @@ const messages = {
       },
       details_page: {
         titre: "Recipe Details",
+        titre1:"Title",
         label_ingredients: "Ingredients",
+        label_category:"category",
         label_type: "Type",
         button_back: "Back"
+      },
+      details_category:{
+        titre:"Category Details",
+         id:"Category ID",
+        name:"Category Name"
       },
       app_page: {
         titre: "GestionRecipe",
@@ -104,11 +111,17 @@ const messages = {
       },
       details_page: {
         titre: "Détails de la recette",
+        titre1:"Titre",
         label_ingredients: "Ingrédients",
         label_type: "Type",
+        label_category:"categorie",
         button_back: "Fermer"
       },
-      
+      details_category:{
+        titre:"Details de la categorie",
+        id:"ID du categorie",
+        name:"Nom de la categorie"
+      },
       app_page: {
         titre: "GestionRecette",
         ricipe_title: "Recette",
