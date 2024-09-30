@@ -45,8 +45,17 @@
         <label for="category" class="form-label">{{
           $t("recette.modify_page.label_category")
         }}</label>
-        <select v-model="categoryName" id="category_id" class="form-select" required>
-          <option v-for="category in categories" :key="category.id" :value="category.name">
+        <select
+          v-model="categoryName"
+          id="category_id"
+          class="form-select"
+          required
+        >
+          <option
+            v-for="category in categories"
+            :key="category.id"
+            :value="category.name"
+          >
             {{ category.name }}
           </option>
         </select>
@@ -88,7 +97,7 @@ onMounted(() => {
     titre.value = recipe.titre;
     type.value = recipe.type;
     ingredient.value = recipe.ingredient;
-    const category = categories.value.find(c => c.id === recipe.category_id);
+    const category = categories.value.find((c) => c.id === recipe.category_id);
     if (category) {
       categoryName.value = category.name;
     }
@@ -96,11 +105,14 @@ onMounted(() => {
 });
 
 function handleSubmit() {
-  const selectedCategory = categories.value.find(c => c.name === categoryName.value);
+  const selectedCategory = categories.value.find(
+    (c) => c.name === categoryName.value
+  );
   store.updateRecipe(id, {
     titre: titre.value,
     ingredient: ingredient.value,
     type: type.value,
+    category_id: selectedCategory.id,
   });
   router.push({ name: "recette" });
 }
