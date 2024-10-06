@@ -103,6 +103,7 @@ function submitform() {
 // Chargement des données à l'initialisation
 onMounted(() => {
   store.loadDataFromApis();
+  store.loadDataFromApi();
 });
 
 function viewRecipe(recipe) {
@@ -110,11 +111,18 @@ function viewRecipe(recipe) {
 }
 
 function deleteCategory(id) {
+  const isAssigned = store.recipes.some((recipe) => recipe.category_id === id);
   const confirmation = window.confirm(
     "Voulez-vous vraiment supprimer cette catégorie ?"
   );
+
   if (confirmation) {
-    if (id) {
+    if (isAssigned) {
+      alert(
+        "Cette catégorie est assignée à une ou plusieurs recettes et ne peut pas être supprimée."
+      );
+      return;
+    } else if (id) {
       store.deleteCategory(id);
       console.log("Catégorie supprimée :", id);
     } else {
