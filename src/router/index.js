@@ -56,7 +56,7 @@ const routes = [
     component: ShowCategory
   },
   {
-    path: "/categorie/ajoutCategory/",
+    path: "/categorie/ajoutCategory",
     name: "ajoutCategory",
     component: AjoutCategory
   },

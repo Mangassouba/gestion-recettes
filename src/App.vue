@@ -18,6 +18,7 @@
         aria-controls="navbarNavAltMarkup"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        @click="toggleNavbar"
       >
         <span class="navbar-toggler-icon"></span>
       </button>

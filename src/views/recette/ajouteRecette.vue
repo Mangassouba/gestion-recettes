@@ -51,9 +51,9 @@
           class="form-select"
           required
         >
-          <option value="" disabled>{{
-            $t("recette.create_page.option")
-          }}</option>
+          <option value="" disabled>
+            {{ $t("recette.create_page.option") }}
+          </option>
           <option
             v-for="category in categorys"
             :key="category.id"
@@ -63,11 +63,11 @@
           </option>
         </select>
       </div>
-      <div class="d-flex justify-content-between" >
-      <button type="submit" class="btn btn-primary">
-        {{ $t("recette.create_page.button_add") }}
-      </button>
-  </div>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">
+          {{ $t("recette.create_page.button_add") }}
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -93,6 +93,30 @@ onMounted(async () => {
 });
 
 function handleSubmit() {
+  if (titre.value.length < 5 || titre.value.length > 500) {
+    alert("Le titre de la recette doit contenir entre 5 et 500 caractères.");
+    return;
+  }
+
+  const existingRecipe = store.recipes.find(
+    (recipe) => recipe.titre.toLowerCase() === titre.value.toLowerCase()
+  );
+
+  if (existingRecipe) {
+    alert("Cette recette existe déjà.");
+  } else {
+    store.addRecipe({
+      titre: titre.value,
+      type: type.value,
+      ingredient: ingredient.value,
+      category_id: category_id.value,
+    });
+    titre.value = "";
+    type.value = "";
+    ingredient.value = "";
+    category_id.value = "";
+    router.push("/recette");
+  }
   store.addRecipe({
     titre: titre.value,
     type: type.value,

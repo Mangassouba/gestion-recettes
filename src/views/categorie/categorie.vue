@@ -4,7 +4,7 @@
 
     <div class="col">
       <div class="d-flex justify-content-end">
-        <router-link to="/ajoutCategory" class="btn btn-primary">
+        <router-link :to="{name :'ajoutCategory'}" class="btn btn-primary">
           {{ $t("recette.list_category.button_add") }}
         </router-link>
       </div>
