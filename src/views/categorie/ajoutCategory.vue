@@ -13,6 +13,7 @@
               class="form-control"
               v-model="name"
               id="categorie"
+              required
             />
           </div>
         </div>
@@ -36,12 +37,27 @@ const router = useRouter();
 const name = ref("");
 
 function submitForm() {
-  if (name.value.trim() !== "") {
+  
+
+  if(name.value.length < 5 || name.value.length > 100){
+    alert("Le nom de la category doit contenir entre 5 et 100 caractères.");
+    return;
+  }
+
+  const existingCategory = store.categorys.find(
+    (category) => category.name.toLowerCase() === name.value.toLowerCase()
+  );
+  
+
+  if(existingCategory){
+    alert("cette categorie existe déjà.")
+  }else{
     store.addCategory({
       name: name.value,
     });
     name.value = "";
     router.push({ name: "categorie" });
   }
+  
 }
 </script>
