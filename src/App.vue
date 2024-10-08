@@ -21,6 +21,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <div :class="['collapse', 'navbar-collapse', { show: isNavbarVisible }]" id="navbarSupportedContent">
 
       <!-- Liens du menu -->
       <div
@@ -28,17 +29,18 @@
         id="navbarNavAltMarkup"
       >
         <div class="navbar-nav gap-3">
+          <RouterLink
+          class="nav-link"
+          :class="{ active: route.path.startsWith('/recette') }"
+          to="/recette"
+        >
+        {{ $t("recette.app_page.ricipe_title") }}
+        </RouterLink>
+         
           <router-link
             class="nav-link"
-            :to="{ name: 'recette' }"
-            exact-active-class="active"
-          >
-            {{ $t("recette.app_page.ricipe_title") }}
-          </router-link>
-          <router-link
-            class="nav-link"
-            :to="{ name: 'categorie' }"
-            exact-active-class="active"
+            :class="{ active: route.path.startsWith('/categorie') }"
+          to="/categorie"
           >
             {{ $t("recette.app_page.recipe_title") }}
           </router-link>
@@ -48,6 +50,7 @@
               <option value="en">Anglais</option>
             </select>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -59,7 +62,14 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { RouterView } from 'vue-router';
+import { ref } from 'vue';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
+
+const isNavbarVisible = ref(false);
+const route = useRoute();
+function toggleNavbar() {
+  isNavbarVisible.value = !isNavbarVisible.value;
+}
 
 const { locale } = useI18n();
 const changeLanguage = (event) => {
