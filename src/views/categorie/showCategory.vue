@@ -1,12 +1,19 @@
 <template>
     <div class="container mt-4">
-      <h2>{{ $t("recette.details_page.titre") }}</h2>
+      <h2>{{ $t("recette.details_category.titre") }}</h2>
       <div v-if="category">
-        <h3>{{ category.id }}</h3>
-        <h3>{{ category.name }}</h3>
+        <p>
+        <strong> {{ $t("recette.details_category.id") }}:</strong>
+      </p>
+        <p>{{ category.id }}</p>
+        <p>
+          <strong> {{ $t("recette.details_category.name") }}:</strong>
+        </p>
+        <p>{{ category.name }}</p>
         <button @click="goBack" class="btn btn-secondary mt-3">
           {{ $t("recette.details_page.button_back") }}
         </button>
+        
       </div>
     </div>
   </template>

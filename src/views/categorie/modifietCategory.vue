@@ -2,7 +2,8 @@
     <div class="container mt-4">
       <h4>{{ $t("recette.category_page.titre") }}</h4>
       <div class="row d-flex">
-        <form class="d-flex" @submit.prevent="handleSubmit">
+        <form @submit.prevent="handleSubmit">
+          <div>
           <div class="col-md-6">
             <label for="categorie">{{ $t("recette.category_page.label_title") }}</label>
             <input
@@ -12,8 +13,12 @@
               id="categorie"
             />
           </div>
-          <div class="col-md-4 mt-4 m-4">
+          </div>
+          <div class="col-md-4 mt-4  d-flex justify-content-between w-50">
             <button type="submit" class="btn btn-primary">{{ $t("recette.category_page.button_update") }}</button>
+            <RouterLink class="btn btn-primary" :to="{ name: 'categorie' }">
+              <i class="fas fa-arrow-left"></i>
+            </RouterLink>
           </div>
         </form>
       </div>

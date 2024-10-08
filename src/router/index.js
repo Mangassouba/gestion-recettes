@@ -18,14 +18,9 @@ const routes = [
     name: "Home",
     component: Home,
   },
-  {
-    path: "/categorie",
-    name: "categorie",
-    component: Categorie,
-  },
   
   {
-    path: "/ajout",
+    path: "/recette/ajout",
     name: "ajouteRecette",
     component: AjouteRecette,
   },
@@ -35,27 +30,33 @@ const routes = [
     component: ListeRecette,
   },
   {
-    path: "/mod/:id",
+    path: "/recette/mod/:id",
     name: "modifier",
     component: ModifierRecette,
   },
   {
-    path: "/modifie/:id",
-    name: "modifierCategory",
-    component: ModifietCategory,
-  },
-  {
-    path: "/show/:id",
+    path: "/recette/show/:id",
     name: "show",
     component: ShowRecette
   },
   {
-    path: "/showCategory/:id",
+    path: "/categorie",
+    name: "categorie",
+    component: Categorie,
+  },
+  {
+    path: "/categorie/modifie/:id",
+    name: "modifierCategory",
+    component: ModifietCategory,
+  },
+ 
+  {
+    path: "/categorie/showCategory/:id",
     name: "showCategory",
     component: ShowCategory
   },
   {
-    path: "/ajoutCategory/",
+    path: "/categorie/ajoutCategory/",
     name: "ajoutCategory",
     component: AjoutCategory
   },
